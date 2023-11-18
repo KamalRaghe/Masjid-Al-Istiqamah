@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import { useCallback, useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function App() {
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
+  const [money, setMoney] = useState(0)
   const [husband, setHusband] = useState(0)
   const [wife, setWife] = useState(0)
   const [daughter, setDaughter] = useState(0)
@@ -37,6 +38,12 @@ function App() {
 
   return (
     <div className="App">
+        {count === 0 && <div className='question' style={{border:'1px solid black'}} data-aos="fade-up-right" data-aos-duration="3000">
+          <div style={{paddingRight:'10px'}}>Amount of money left for inheritance</div>
+          <input style={{width:'60px',height:'20px'}} placeholder='Money' type="number" onChange={e => {setMoney(e.target.value)}}/>
+          <button className='center green' onClick={() => setCount(1)}>Enter</button>
+        </div>}
+
         {count === 1 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Is the deceased spouse alive?
           <button className='red' onClick={()=>{setCount(6)}}>Never married</button> 
@@ -108,12 +115,13 @@ function App() {
         </div>}
 
         {count === 10 && <div>
-           {husband !== 0 && <div>Husband cut: {husband}</div> }
-           {wife !== 0 && <div>Wife cut: {wife}</div> }
-           {father === 1/6 && <div>Father cut: {father}</div> }
-           {mother !== 0 && <div>Mother cut: {mother}</div> } 
-           {grandmother !== 0 && <div>GrandMothers cut: {grandmother}</div> }
-           {grandfather !== 0 && <div>Paternal Grandfather cut: {grandfather}</div> }
+           {husband !== 0 && <div>Husband cut: {(money*husband).toFixed(2)}</div> }
+           {wife !== 0 && <div>Wife cut: {(money*wife).toFixed(2)}</div> }
+           {father === 1/6 && <div>Father cut: {(money*father).toFixed(2)}</div> }
+           {mother !== 0 && <div>Mother cut: {(money*mother).toFixed(2)}</div> } 
+           {grandmother !== 0 && <div>GrandMothers cut: {(money*grandmother).toFixed(2)}</div> }
+           {grandfather !== 0 && <div>Paternal Grandfather cut: {(money*grandfather).toFixed(2)}</div>}
+           {son >= 1 && <div>Son cut: {money-(money*husband+money*wife+money*father+money*mother+money*grandmother+money*grandfather).toFixed(2)} </div>}
         </div>}
     </div>
   );
