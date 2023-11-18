@@ -11,7 +11,9 @@ function App() {
   const [daughter, setDaughter] = useState(0)
   const [son,setSon] = useState(0)
   const [mother,setMother] = useState(0)
-  const [Father,setFather] = useState(0)
+  const [father,setFather] = useState(0)
+  const [grandmother,setGrandMother] = useState(0)
+  const [grandfather,setGrandFather] = useState(0)
   const [Granddaughter, setGranddaughter] = useState(0)
   const [grandson,setGrandson] = useState(0)
   const [fullBrother, setFullBother] = useState(0)
@@ -75,15 +77,15 @@ function App() {
         {count === 6 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Are the deceased parents alive?
           <button className='red' onClick={()=>{setCount(7)}}>No</button>
-          <button className='yellow' onClick={()=>{setCount(7)}}>Mother Alive</button>
-          <button className='yellow' onClick={()=>{setCount(7)}}>Father Alive</button>
-          <button className='green' onClick={()=>{setCount(8)}}>Both</button>
+          <button className='yellow' onClick={()=>{setCount(8);if(son>=1 || daughter >= 1){setMother(1/6)}else{setMother(1/3)}}}>Mother Alive</button>
+          <button className='yellow' onClick={()=>{setCount(7);if(son >= 1){setFather(1/6)}else{setFather(true)}}}>Father Alive</button>
+          <button className='green' onClick={()=>{setCount(8);if(son >= 1){setFather(1/6)}else{setFather(true)};if(son>=1 || daughter >= 1){setMother(1/6)}else{setMother(1/3)}}}>Both</button>
         </div>}
         {count === 7 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
-          Are the deceased parents alive?
+          Are the deceased Grandparents alive?
           <button className='red' onClick={()=>{setCount(8)}}>No</button>
-          <button className='yellow' onClick={()=>{setCount(8)}}>Grandmothers Alive</button>
-          <button className='yellow' onClick={()=>{setCount(8)}}>Paternal Grandfather Alive</button>
+          <button className='yellow' onClick={()=>{setCount(8);if(mother === 0){setGrandMother(1/6)}}}>Grandmothers Alive</button>
+          <button className='yellow' onClick={()=>{setCount(8);if(father === 0){setGrandFather(1/6)}}}>Paternal Grandfather Alive</button>
         </div>}
         {count === 8 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Does the deceased have alive siblings?
@@ -102,6 +104,16 @@ function App() {
             <input style={{width:'110px',height:'20px'}} placeholder='Maternal brother' type="number" onChange={e => setMaternalBother(e.target.value)}/>
             <input style={{width:'110px',height:'20px'}} placeholder='Maternal sister' type="number" onChange={e => setMaternalSister(e.target.value)}/>
           </div>
+          <button className='center green' onClick={setCount(10)}>Enter</button>
+        </div>}
+
+        {count === 10 && <div>
+           {husband !== 0 && <div>Husband cut: {husband}</div> }
+           {wife !== 0 && <div>Wife cut: {wife}</div> }
+           {father === 1/6 && <div>Father cut: {father}</div> }
+           {mother !== 0 && <div>Mother cut: {mother}</div> } 
+           {grandmother !== 0 && <div>GrandMothers cut: {grandmother}</div> }
+           {grandfather !== 0 && <div>Paternal Grandfather cut: {grandfather}</div> }
         </div>}
     </div>
   );
