@@ -6,9 +6,15 @@
 }
 
 .center{
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+input{
+  margin: 10px;
+  height: 20px;
 }
 
 .question{
@@ -16,6 +22,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .red,.yellow,.green{
