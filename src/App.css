@@ -1,1 +1,44 @@
 
+.App {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .center{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  input{
+    margin: 10px;
+    height: 20px;
+  }
+  
+  .question{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  
+  .red,.yellow,.green{
+    background-color: red;
+    color: white;
+    margin: 5px;
+    padding: 4px 20px;
+    border-radius: 15px;
+  }
+  
+  .yellow{
+    background-color:yellow;
+    color:black;
+  }
+  
+  .green{
+    background-color:green;
+  }
