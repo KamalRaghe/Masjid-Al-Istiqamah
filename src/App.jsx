@@ -131,11 +131,11 @@ function App() {
             <input style={{width:'110px'}} placeholder='Full brother' type="number" onChange={e => setFullBother(e.target.value)}/>
             <input style={{width:'110px'}} placeholder='Full sister ' type="number" onChange={e => setFullSister(e.target.value)}/>
 
-            <input style={{width:'110px'}} placeholder='Paternal brother' type="number" onChange={e => setPaternalBother(e.target.value)}/>
-            <input style={{width:'110px'}} placeholder='Paternal sister' type="number" onChange={e => setPaternalSister(e.target.value)}/>  
-
             <input style={{width:'110px'}} placeholder='Maternal brother' type="number" onChange={e => setMaternalBother(e.target.value)}/>
             <input style={{width:'110px'}} placeholder='Maternal sister' type="number" onChange={e => setMaternalSister(e.target.value)}/>
+
+            <input style={{width:'110px'}} placeholder='Paternal brother' type="number" onChange={e => setPaternalBother(e.target.value)}/>
+            <input style={{width:'110px'}} placeholder='Paternal sister' type="number" onChange={e => setPaternalSister(e.target.value)}/>  
           </div>
           <button className='center green' onClick={setCount(10)}>Enter</button>
         </div>}
@@ -161,11 +161,13 @@ function App() {
            {son < 1 && grandson < 1 && father === false && fullBrother >= 1 && <div>Each full brother cut: {2*((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(fullBrother*2+fullSister)))).toFixed(2)}</div>}
            {son < 1 && grandson < 1 && father === false && fullBrother >= 1 && fullSister >= 1 && <div>Each full sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(fullBrother*2+fullSister)))).toFixed(2)}</div>}
            
+           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && maternalBrother >= 1 &&  paternalBrother < 1 && <div>Each maternal brother cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(maternalSister+maternalBrother)))).toFixed(2)}</div>}
+           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother < 1 && maternalBrother >= 1 && maternalSister >= 1 &&<div>Each maternal sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(maternalBrother+maternalSister)))).toFixed(2)}</div>}
+
            {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother>= 1 && <div>Each paternal brother cut: {2*(((money-((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(paternalBrother*2+paternalSister)))).toFixed(2)}</div>}
            {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother>= 1 && paternalSister >= 1 && <div>Each paternal sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(paternalBrother*2+paternalSister)))).toFixed(2)}</div>}
            
-           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && maternalBrother >= 1 &&  paternalBrother < 1 && <div>Each maternal brother cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(maternalSister+maternalBrother)))).toFixed(2)}</div>}
-           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother < 1 && maternalBrother >= 1 && maternalSister >= 1 &&<div>Each maternal sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(maternalBrother+maternalSister)))).toFixed(2)}</div>}
+           
         </div>}   
     </div>
   );
