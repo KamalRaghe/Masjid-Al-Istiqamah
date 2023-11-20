@@ -38,12 +38,14 @@ function App() {
 
   return (
     <div className="App">
+      {/* Money for inheritance */}
         {count === 0 && <div className='question'data-aos="fade-up-right" data-aos-duration="3000">
           <div style={{paddingRight:'10px'}}>Amount of money left for inheritance</div>
           <input style={{width:'80px'}} placeholder='Money' type="number" onChange={e => {setMoney(e.target.value)}}/>
           <button className='center green' onClick={() => setCount(1)}>Enter</button>
         </div>}
-
+        
+        {/* Spouse */}
         {count === 1 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Is the deceased spouse alive?
           <div className='center' >
@@ -54,6 +56,7 @@ function App() {
           </div>
         </div>}
 
+        {/*Children */}  
         {count === 2 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Did the deceased have children?
           <div className='center'>
@@ -62,6 +65,7 @@ function App() {
           </div>
         </div>}
 
+        {/* Children */}  
         {count === 3 && <div className='question center' style={{width:'800px'}} data-aos="fade-up-right" data-aos-duration="3000">
           How many children does the deceased have that are alive?
           <div className='center'>
@@ -82,6 +86,7 @@ function App() {
           </div>
         </div>}
 
+        {/* GrandChildren */}        
         {count === 4 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Did the deceased have grandchildren?
           <div className='center'>
@@ -90,6 +95,7 @@ function App() {
           </div>
         </div>}
 
+        {/* GrandChildren */}     
         {count === 5 && <div className='question center' style={{width:'800px'}} data-aos="fade-up-right" data-aos-duration="3000">
           How many grandchildren does the deceased have that are alive?
           <div className='center'>
@@ -99,6 +105,7 @@ function App() {
           </div>
         </div>}
 
+        {/* parents */}
         {count === 6 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Are the deceased parents alive?
           <div className='center'>
@@ -109,6 +116,7 @@ function App() {
           </div>
         </div>}
 
+        {/* Grandparents */}
         {count === 7 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Are the deceased Grandparents alive?
           <div className='center'>
@@ -117,13 +125,17 @@ function App() {
             <button className='yellow' onClick={()=>{ if(son >= 1){setCount(10)}else{setCount(8)};if(father === 0){setGrandFather(1/6)}}}>Paternal Grandfather Alive</button>
           </div>
         </div>}
+        
+        {/* Siblings */}
         {count === 8 && <div className='question' data-aos="fade-up-right" data-aos-duration="3000">
           Does the deceased have alive siblings?
           <div className='center'>
-            <button className='red' onClick={()=>{setCount(9)}}>No</button>
-            <button className='green' onClick={()=>{setCount(10)}}>Yes</button>
+            <button className='red' onClick={()=>{setCount(10)}}>No</button>
+            <button className='green' onClick={()=>{setCount(9)}}>Yes</button>
           </div>
         </div>}
+
+        {/* Siblings */}
         {count === 9 && <div style = {{flexDirection:'column'}} className='question' data-aos="fade-up-right" data-aos-duration='3000'>
           <div className='center'>Amount of siblings</div>
           <div>
@@ -140,31 +152,42 @@ function App() {
         </div>}
 
         {count === 10 && <div>
+           {/* spouse  */}
            {husband !== 0 && <div>Husband cut: {(money*husband).toFixed(2)}</div> }
            {wife !== 0 && <div>Wife cut: {(money*wife).toFixed(2)}</div> }
            
+
+            {/* parents */}
            {father === 1/6 && <div>Father cut: {(money*father).toFixed(2)}</div> }
            {father === true && <div>Father cut: {(money-(((money*husband)+(money*wife)+(money*mother)+(money*grandmother)+(money*grandfather)+(daughterCut*money)))).toFixed(2)}</div> }
            {mother !== 0 && <div>Mother cut: {(money*mother).toFixed(2)}</div> } 
            
+           {/* Grandparents */}
            {grandmother !== 0 && <div>GrandMothers cut: {(money*grandmother).toFixed(2)}</div> }
            {grandfather !== 0 && <div>Paternal Grandfather cut: {(money*grandfather).toFixed(2)}</div>}
            
+           {/* Children */}
            {son >= 1 && <div>Each son cut: {2*(((money-((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(son*2+daughter)))).toFixed(2)} </div>}
            {son >= 1 && daughter>=1 && <div>Each daughter cut: {((money-((money*husband+money*wife+money*father+money*mother+money*grandmother+money*grandfather)/(son*2+daughter)))).toFixed(2)} </div>}
            {son < 1 && daughter >=1 && <div>Each daughter cut: {((daughterCut*money)/daughter).toFixed(2)} </div>}
 
+            {/* GrandChildren */}
            {son < 1 && grandson >= 1 && <div>Each grandson cut: {2*((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(grandson*2+granddaughter)))).toFixed(2)} </div>}
            {son < 1 && grandson >= 1 && granddaughter >= 1 && <div>Each granddaughter cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(grandson*2+granddaughter)))).toFixed(2)} </div>}
            
+            {/* full siblings  */}
            {son < 1 && grandson < 1 && father === false && fullBrother >= 1 && <div>Each full brother cut: {2*((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(fullBrother*2+fullSister)))).toFixed(2)}</div>}
            {son < 1 && grandson < 1 && father === false && fullBrother >= 1 && fullSister >= 1 && <div>Each full sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(fullBrother*2+fullSister)))).toFixed(2)}</div>}
            
+           {/* paternal siblings  */}
+           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother>= 1 && <div>Each paternal brother cut: {2*(((money-((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(paternalBrother*2+paternalSister)))).toFixed(2)}</div>}
+           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother>= 1 && paternalSister >= 1 && <div>Each paternal sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(paternalBrother*2+paternalSister)))).toFixed(2)}</div>}
+
+            {/* maternal siblings */}
            {son < 1 && grandson < 1 && father === false && fullBrother < 1 && maternalBrother >= 1 &&  paternalBrother < 1 && <div>Each maternal brother cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(maternalSister+maternalBrother)))).toFixed(2)}</div>}
            {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother < 1 && maternalBrother >= 1 && maternalSister >= 1 &&<div>Each maternal sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(maternalBrother+maternalSister)))).toFixed(2)}</div>}
 
-           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother>= 1 && <div>Each paternal brother cut: {2*(((money-((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(paternalBrother*2+paternalSister)))).toFixed(2)}</div>}
-           {son < 1 && grandson < 1 && father === false && fullBrother < 1 && paternalBrother>= 1 && paternalSister >= 1 && <div>Each paternal sister cut: {((money-(((money*husband)+(money*wife)+(money*father)+(money*mother)+(money*grandmother)+(money*grandfather))/(paternalBrother*2+paternalSister)))).toFixed(2)}</div>}
+           
            
            
         </div>}   
