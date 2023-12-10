@@ -6,7 +6,7 @@ import 'aos/dist/aos.css';
 function App() {
   const [done, setDone] = useState(false)
   const [over, setOver] = useState(1)
-  const [cuts, setCuts] = useState(1)
+  const [cuts, setCuts] = useState(0)
   const [count, setCount] = useState(0)
   const [money, setMoney] = useState(0)
   const [husband, setHusband] = useState(0)
@@ -39,7 +39,7 @@ function App() {
     if(father === true){
       setCuts(husband+wife+mother+grandmother+grandfather+daughterCut)
     }else{
-      setCuts(husband+wife+mother+grandmother+grandfather+father)
+      setCuts(husband+wife+mother+grandmother+grandfather+father+daughterCut)
     }
   } 
 
@@ -49,12 +49,28 @@ function App() {
 
   useEffect(()=>{
     Cuts()
-    console.log(cuts,over,father,husband+wife+mother+grandmother+grandfather+daughterCut)
-    if(cuts >= 1){
+    setSon(parseInt(son))
+    setDaughter(parseInt(daughter))
+    setGrandson(parseInt(grandson))
+    setGranddaughter(parseInt(granddaughter))
+    setFullBother(parseInt(fullBrother))
+    setFullSister(parseInt(fullSister))
+    setMaternalBother(parseInt(maternalBrother))
+    setMaternalSister(parseInt(maternalSister))
+    setPaternalBother(parseInt(paternalBrother))
+    setPaternalSister(parseInt(paternalSister))
+  },[done])
+
+  useEffect(()=>{
+    console.log(((son*2)+daughter) ,'s',son,'d',daughter)
+    if(cuts >= 1 && father === true){
       setOver(husband+wife+mother+grandmother+grandfather+daughterCut)
       setCuts(1)
+    }if(cuts >= 1 && father !== true){
+      setOver(husband+wife+father+mother+grandmother+grandfather+daughterCut)
+      setCuts(1)
     }
-  },[done])
+  },[cuts])
 
   return (
     <div className="App">
@@ -187,7 +203,7 @@ function App() {
            {grandfather !== 0 && <div>Paternal Grandfather cut: {(money*grandfather/over).toFixed(2)}</div>}
            
            {/* Children */}
-           {son >= 1 && <div>Each son cut: {2*((money-(money*cuts))/(son*2+daughter)).toFixed(2)} </div>}
+           {son >= 1 && <div>Each son cut: {2*((money-(money*cuts))/((son*2)+daughter)).toFixed(2)} </div>}
            {son >= 1 && daughter>=1 && <div>Each daughter cut: {((money-(money*cuts))/(son*2+daughter)).toFixed(2)} </div>}
            {son < 1 && daughter >=1 && <div>Each daughter cut: {((daughterCut*money/over)/daughter).toFixed(2)} </div>}
 
